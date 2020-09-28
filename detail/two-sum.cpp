@@ -8,44 +8,63 @@ using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-      int i, border, temp, mid = 0;
+      int i, border = 0, temp, mid = 0;
       vector<int> two;
       two.push_back(-1);
-      sort(nums.begin(),nums.end());
-      for ( i = 0; i < nums.size(); i++ ) {
-        if ( nums[i] >= target ) {
-          border = i;
-          break;
-        }
-      }
-      if ( border == 0 ) {
-        return two;
-      }
-      for ( i = 0; i <= border; i++) {
-        if ( nums[i] >= (target%2 == 0? target/2 : target/2 + 1) ) {
-          mid = i;
-        }
-      }
-      if ( mid == 0 ) {
-        return two;
-      }
-      i = mid;
-      while ( i <= border ) {
+      for ( i = 0; i < nums.size()-1; i++ ) {
         temp = target - nums[i];
-        for ( mid; mid >= 0; mid--) {
-          if ( mid < temp ) {
-            break;
+        for( border = i+1; border < nums.size(); border++ ) {
+          if ( border == i ) {
+            continue;
           }
-          if ( mid = temp ) {
+          if( nums[border] == temp ) {
             two.clear();
-            two.push_back(mid);
             two.push_back(i);
-            return two;
+            two.push_back(border);
           }
         }
-        i++;
       }
-      return two;
+      // sort(nums.begin(),nums.end());
+      // for ( i = 0; i < nums.size(); i++ ) {
+      //   if ( nums[i] >= target ) {
+      //     border = i;
+      //     break;
+      //   }
+      //   border++;
+      // }
+      // if ( border == 0 ) {
+      //   return two;
+      // }
+      // for ( i = 0; i <= border; i++) {
+      //   if ( nums[i] >= (target%2 == 0? target/2 : (target/2 + 1)) ) {
+      //     mid = i-1;
+      //   }
+      // }
+      // if ( mid == 0 ) {
+      //   return two;
+      // }
+      // i = mid;
+      // mid--;
+      // while ( i <= border ) {
+      //   temp = target - nums[i];
+      //   for ( mid; mid >= 0; mid--) {
+      //     // cout << "mid=" << mid << "\n------\n" << "i=" << i << "\n------\n";
+      //     if ( nums[mid] < temp ) {
+      //       break;
+      //     }
+      //     if ( nums[mid] == temp ) {
+      //       two.clear();
+      //       two.push_back(mid);
+      //       two.push_back(i);
+      //       return two;
+      //     }
+      //   }
+      //   if( mid == 0 && nums[mid] > temp ) {
+      //     break;
+      //   } 
+      //   i++;
+      // }
+       return two;
     }
 };
 
@@ -68,5 +87,6 @@ int main () {
     cout << obj[0] << "\n" << obj[1];
   }
   Sleep(1000);
+  cin >> target;
   return 0;
 }
